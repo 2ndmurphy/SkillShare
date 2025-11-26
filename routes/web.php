@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\Mentor\{
-    MentorProfileController,
+    DashboardController,
     RoomController,
     RoomMaterialController,
-    PostController
+    PostController,
+    MentorProfileController,
 };
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +31,8 @@ Route::middleware('auth')->group(function () {
     ]);
 
     // Mentor Verified Only Page Here
-    Route::middleware(['role:mentor', 'verified'])->prefix('mentor')->name('mentor.')->group(function () {
+    Route::middleware(['role:mentor', 'verified'])->prefix('m')->name('mentor.')->group(function () {
+        Route::resource('dashboard', DashboardController::class);
         Route::resource('profile', MentorProfileController::class);
         Route::resource('rooms', RoomController::class);
         Route::resource('rooms.materials', RoomMaterialController::class);
