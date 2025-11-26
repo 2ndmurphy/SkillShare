@@ -1,22 +1,30 @@
+@php
+    use App\Helpers\RedirectHelper;
+
+    $authButton = RedirectHelper::getAuthButton();
+@endphp
+
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
-    <title>Shareroom – Belajar dari Kelas Terbaik</title>
+    <title>Shareroom - Belajar dari Kelas Terbaik</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
 
     {{-- NAVBAR --}}
     <header class="sticky top-0 z-30 bg-white border-b border-slate-100">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-            
+
             {{-- Logo --}}
             <a href="/" class="flex items-center gap-2">
                 <img src="{{ asset('images/icons/shareroom-icon.webp') }}" alt="Shareroom logo"
-                     class="w-12 h-12 object-contain">
+                    class="w-12 h-12 object-contain">
                 <span class="font-semibold text-xl tracking-tight">
                     Share<span class="text-teal-500">room</span>
                 </span>
@@ -32,15 +40,22 @@
 
             {{-- Auth Buttons --}}
             <div class="flex items-center gap-3 text-sm">
-                <a href="{{ route('login') }}"
-                   class="hidden sm:inline-block px-4 py-2 rounded-full border border-slate-300 hover:border-teal-400 hover:text-teal-500 transition">
-                    Masuk
-                </a>
+                @if (!$authButton['is_login'])
+                    <a href="{{ route('login') }}"
+                        class="hidden sm:inline-block px-4 py-2 rounded-full border border-slate-300 hover:border-teal-400 hover:text-teal-500 transition">
+                        Masuk
+                    </a>
 
-                <a href="{{ route('register') }}"
-                   class="inline-flex items-center px-4 py-2 rounded-full bg-teal-400 text-white font-semibold shadow-sm hover:bg-teal-500 transition">
-                    Daftar Gratis
-                </a>
+                    <a href="{{ route('register') }}"
+                        class="inline-flex items-center px-4 py-2 rounded-full bg-teal-400 text-white font-semibold shadow-sm hover:bg-teal-500 transition">
+                        Daftar Gratis
+                    </a>
+                @else
+                    <a href="{{ $authButton['dashboard_url'] }}"
+                        class="inline-flex items-center px-4 py-2 rounded-full bg-teal-500 text-white font-semibold shadow hover:bg-teal-600 transition">
+                        {{ $authButton['label'] }}
+                    </a>
+                @endif
             </div>
         </div>
     </header>
@@ -69,12 +84,12 @@
 
                     <div class="mt-8 flex flex-wrap items-center gap-4">
                         <a href="{{ route('register') }}"
-                           class="inline-flex items-center px-6 py-3 rounded-full bg-white text-teal-600 font-semibold shadow-lg shadow-teal-900/20 hover:bg-slate-50 transition">
+                            class="inline-flex items-center px-6 py-3 rounded-full bg-white text-teal-600 font-semibold shadow-lg shadow-teal-900/20 hover:bg-slate-50 transition">
                             Mulai Buat Akun
                         </a>
 
                         <a href="#features"
-                           class="inline-flex items-center text-sm font-medium text-white/90 hover:text-white">
+                            class="inline-flex items-center text-sm font-medium text-white/90 hover:text-white">
                             Lihat bagaimana Shareroom bekerja →
                         </a>
                     </div>
@@ -102,28 +117,32 @@
                     <div class="absolute -bottom-10 -left-4 w-28 h-28 bg-teal-300/40 rounded-full blur-2xl"></div>
 
                     <div class="relative bg-white rounded-3xl shadow-2xl shadow-teal-900/20 p-5 sm:p-6">
-                        
+
                         <div class="flex items-center justify-between mb-4">
                             <div>
                                 <p class="text-xs font-medium text-slate-500">Kelas sedang berlangsung</p>
                                 <p class="text-sm font-semibold text-slate-900 mt-1">UI/UX Design for Beginner</p>
                             </div>
 
-                            <span class="inline-flex items-center px-3 py-1 rounded-full bg-teal-50 text-teal-600 text-[11px] font-medium">
+                            <span
+                                class="inline-flex items-center px-3 py-1 rounded-full bg-teal-50 text-teal-600 text-[11px] font-medium">
                                 32 peserta
                             </span>
                         </div>
 
                         <div class="aspect-video rounded-2xl overflow-hidden bg-slate-100 mb-4">
                             <img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg"
-                                 class="w-full h-full object-cover">
+                                class="w-full h-full object-cover">
                         </div>
 
                         <div class="flex items-center justify-between text-xs text-slate-500">
                             <div class="flex -space-x-2">
-                                <img class="w-7 h-7 rounded-full border-2 border-white" src="https://i.pravatar.cc/40?img=4">
-                                <img class="w-7 h-7 rounded-full border-2 border-white" src="https://i.pravatar.cc/40?img=5">
-                                <img class="w-7 h-7 rounded-full border-2 border-white" src="https://i.pravatar.cc/40?img=6">
+                                <img class="w-7 h-7 rounded-full border-2 border-white"
+                                    src="https://i.pravatar.cc/40?img=4">
+                                <img class="w-7 h-7 rounded-full border-2 border-white"
+                                    src="https://i.pravatar.cc/40?img=5">
+                                <img class="w-7 h-7 rounded-full border-2 border-white"
+                                    src="https://i.pravatar.cc/40?img=6">
                             </div>
                             <p>Mulai jam 19.00 WIB · Zoom & Rekaman</p>
                         </div>
@@ -201,21 +220,24 @@
 
                     <ol class="space-y-4 text-sm text-slate-600">
                         <li class="flex gap-3">
-                            <span class="w-7 h-7 rounded-full bg-teal-400 text-white flex items-center justify-center text-xs font-semibold">1</span>
+                            <span
+                                class="w-7 h-7 rounded-full bg-teal-400 text-white flex items-center justify-center text-xs font-semibold">1</span>
                             <div>
                                 <p class="font-semibold">Buat akun sebagai mentor atau peserta</p>
                                 <p class="text-xs text-slate-500 mt-1">Daftar menggunakan email dan pilih peranmu.</p>
                             </div>
                         </li>
                         <li class="flex gap-3">
-                            <span class="w-7 h-7 rounded-full bg-teal-400 text-white flex items-center justify-center text-xs font-semibold">2</span>
+                            <span
+                                class="w-7 h-7 rounded-full bg-teal-400 text-white flex items-center justify-center text-xs font-semibold">2</span>
                             <div>
                                 <p class="font-semibold">Buka kelas atau pilih kelas</p>
                                 <p class="text-xs text-slate-500 mt-1">Mentor membuat kelas, peserta memilih kelas.</p>
                             </div>
                         </li>
                         <li class="flex gap-3">
-                            <span class="w-7 h-7 rounded-full bg-teal-400 text-white flex items-center justify-center text-xs font-semibold">3</span>
+                            <span
+                                class="w-7 h-7 rounded-full bg-teal-400 text-white flex items-center justify-center text-xs font-semibold">3</span>
                             <div>
                                 <p class="font-semibold">Belajar bareng</p>
                                 <p class="text-xs text-slate-500 mt-1">Ikuti sesi, akses materi, dan berdiskusi.</p>
@@ -234,7 +256,8 @@
 
                     <div class="space-y-4 text-sm">
 
-                        <div class="flex justify-between items-center bg-white rounded-2xl px-4 py-3 border border-slate-100">
+                        <div
+                            class="flex justify-between items-center bg-white rounded-2xl px-4 py-3 border border-slate-100">
                             <div>
                                 <p class="font-semibold">Front-end Web Development 101</p>
                                 <p class="text-[11px] text-slate-500 mt-1">HTML · CSS · Tailwind · JS</p>
@@ -242,7 +265,8 @@
                             <span class="text-xs px-2 py-1 rounded-full bg-teal-50 text-teal-600">Beginner</span>
                         </div>
 
-                        <div class="flex justify-between items-center bg-white rounded-2xl px-4 py-3 border border-slate-100">
+                        <div
+                            class="flex justify-between items-center bg-white rounded-2xl px-4 py-3 border border-slate-100">
                             <div>
                                 <p class="font-semibold">Productive Note-taking with Notion</p>
                                 <p class="text-[11px] text-slate-500 mt-1">Workshop · Template · Q&A</p>
@@ -250,7 +274,8 @@
                             <span class="text-xs px-2 py-1 rounded-full bg-sky-50 text-sky-600">Workshop</span>
                         </div>
 
-                        <div class="flex justify-between items-center bg-white rounded-2xl px-4 py-3 border border-slate-100">
+                        <div
+                            class="flex justify-between items-center bg-white rounded-2xl px-4 py-3 border border-slate-100">
                             <div>
                                 <p class="font-semibold">Belajar Public Speaking dari Nol</p>
                                 <p class="text-[11px] text-slate-500 mt-1">3 sesi · Rekaman materi</p>
@@ -324,12 +349,12 @@
                 <div class="flex flex-wrap items-center justify-center gap-4">
 
                     <a href="{{ route('register') }}"
-                       class="inline-flex items-center px-7 py-3 rounded-full bg-white text-teal-600 font-semibold shadow-lg hover:bg-slate-50 transition">
+                        class="inline-flex items-center px-7 py-3 rounded-full bg-white text-teal-600 font-semibold shadow-lg hover:bg-slate-50 transition">
                         Daftar sebagai Mentor
                     </a>
 
                     <a href="{{ route('register') }}"
-                       class="inline-flex items-center px-6 py-3 rounded-full border border-teal-100 text-sm font-medium text-white hover:bg-teal-300/60 transition">
+                        class="inline-flex items-center px-6 py-3 rounded-full border border-teal-100 text-sm font-medium text-white hover:bg-teal-300/60 transition">
                         Daftar sebagai Peserta
                     </a>
 
@@ -343,7 +368,8 @@
 
     {{-- FOOTER --}}
     <footer class="border-t border-slate-100 bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+        <div
+            class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
             <p>© {{ date('Y') }} Shareroom. All rights reserved.</p>
 
             <div class="flex gap-4">
@@ -354,4 +380,5 @@
     </footer>
 
 </body>
+
 </html>
