@@ -26,7 +26,6 @@ class StoreMaterialRequest extends FormRequest
      */
     public function rules(): array
     {
-        // Kita gunakan 'type' (dari UI) untuk validasi kondisional
         return [
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:65535'],

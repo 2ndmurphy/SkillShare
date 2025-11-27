@@ -7,8 +7,6 @@ use App\Http\Requests\Mentor\StoreRoomRequest;
 use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\RoomType;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 class RoomController extends Controller
 {
@@ -27,7 +25,7 @@ class RoomController extends Controller
     {
         $roomTypes = RoomType::query()->orderBy('name')->get();
 
-        // return view('mentor.room.create', ['roomTypes' => $roomTypes,]);
+        return view('mentor.room.create', ['roomTypes' => $roomTypes,]);
     }
 
     /**
@@ -41,8 +39,8 @@ class RoomController extends Controller
 
         $room = $mentor->roomsAsMentor()->create($validated);
 
-        // return redirect()->route('mentor.material.create', $room)
-        //     ->with('status', 'Room berhasil dibuat! Silakan tambahkan materi.');
+        return redirect()->route('mentor.rooms.materials.create', $room)
+            ->with('status', 'Room berhasil dibuat! Silakan tambahkan materi.');
     }
 
     /**
@@ -56,15 +54,22 @@ class RoomController extends Controller
 
         $room->load(['materials', 'posts']);
 
-        // return view('mentor.room.show', ['room' => $room]);
+        return view('mentor.room.show', ['room' => $room]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Room $room)
+    public function edit(StoreRoomRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $mentor = $request->user();
+
+        $room = $mentor->roomsAsMentor()->update($validated);
+
+        return redirect()->route('mentor.rooms.materials.edit', $room)
+            ->with('status', 'Room berhasil diupdate!');
     }
 
     /**

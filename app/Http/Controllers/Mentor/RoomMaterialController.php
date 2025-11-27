@@ -29,7 +29,7 @@ class RoomMaterialController extends Controller
         // Eagaer load materi yang sudah ada di room ini
         $room->load('materials');
 
-        // return view('mentor.material.create', compact('room'));
+        return view('mentor.material.create', compact('room'));
     }
 
     /**
@@ -47,8 +47,8 @@ class RoomMaterialController extends Controller
 
         $room->materials()->create($data);
 
-        // return redirect()->route('mentor.material.create', $room)
-        //                  ->with('status', 'Materi berhasil ditambahkan.');
+        return redirect()->route('mentor.rooms.posts.create', $room)
+                         ->with('status', 'Materi berhasil ditambahkan.');
     }
 
     /**
@@ -90,7 +90,7 @@ class RoomMaterialController extends Controller
 
         $roomMaterial->delete();
 
-        // return redirect()->route('mentor.material.create', $room)
-                        //  ->with('status', 'Materi berhasil dihapus.');
+        return redirect()->route('mentor.rooms.materials.create', $room)
+                         ->with('status', 'Materi berhasil dihapus.');
     }
 }

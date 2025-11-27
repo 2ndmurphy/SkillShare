@@ -25,9 +25,9 @@ class PostController extends Controller
      */
     public function create(Room $room)
     {
-        // return view('mentor.post.create', [
-        //     'room' => $room,
-        // ]);
+        return view('mentor.post.create', [
+            'room' => $room,
+        ]);
     }
 
     /**
@@ -43,8 +43,8 @@ class PostController extends Controller
             'content' => $validated['content'],
         ]);
 
-        // return redirect()->route('mentor.room.show', $room)
-            // ->with('status', 'Post undangan berhasil dipublikasikan!');
+        return redirect()->route('mentor.rooms.show', $room)
+            ->with('status', 'Post undangan berhasil dipublikasikan!');
     }
 
     /**
@@ -52,15 +52,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Post $post)
-    {
-        //
+        
     }
 
     /**
@@ -72,10 +64,16 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Hapus (Soft Delete) post undangan dari room.
+     * * @param \App\Models\Room $room
+     * @param \App\Models\Post $post
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Post $post)
+    public function destroy(Room $room, Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('mentor.rooms.show', $room)
+            ->with('status', 'Post undangan berhasil dihapus!');
     }
 }
