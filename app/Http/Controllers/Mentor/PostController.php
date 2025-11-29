@@ -48,26 +48,33 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post) {}
-
-    public function edit(Post $post)
+    public function show(Post $post) 
     {
-        if ($post->user_id !== auth()->user()->id) {
+
+    }
+
+    public function edit(Room $room,Post $post)
+    {
+        if ($post->user_id !== auth()->id()) {
             abort(403);
         }
 
         return view('mentor.post.edit', [
             'post' => $post,
-            'room' => $post->room,
+            'room' => $room,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(StorePostRequest $request, Post $post)
+    public function update(StorePostRequest $request, Room $room, Post $post)
     {
-        if ($post->user_id !== auth()->user()->id) {
+        if ($post->room_id !== $room->id) {
+            abort(403);
+        }
+
+        if ($post->user_id !== auth()->id()) {
             abort(403);
         }
 
@@ -78,7 +85,7 @@ class PostController extends Controller
             'content' => $validated['content'],
         ]);
 
-        return redirect()->route('mentor.rooms.show', $post->room)
+        return redirect()->route('mentor.rooms.show', $room)
             ->with('status', 'Post undangan berhasil diperbarui!');
     }
 

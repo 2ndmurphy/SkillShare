@@ -29,7 +29,7 @@
 
         {{-- DESKRIPSI --}}
         <p class="text-sm text-gray-600 leading-relaxed line-clamp-3">
-            {{ $room->description }}
+            {{ Str::limit($room->description, 50, '...') }}
         </p>
     </div>
 
@@ -43,17 +43,17 @@
         </a>
 
         <div>
-            @if($room->status == 'open')
+            @if($room->status == 'waiting')
                 <span
                     class="px-3 py-1 inline-flex text-[11px] leading-5 font-semibold rounded-full
                            border border-emerald-200 bg-emerald-50 text-emerald-700">
                     Dibuka
                 </span>
-            @elseif($room->status == 'closed')
+            @elseif($room->status == 'started')
                 <span
                     class="px-3 py-1 inline-flex text-[11px] leading-5 font-semibold rounded-full
                            border border-rose-200 bg-rose-50 text-rose-700">
-                    Ditutup
+                    Sedang berlangsung
                 </span>
             @else
                 <span

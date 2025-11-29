@@ -7,8 +7,7 @@
             <div>
                 <p class="font-semibold text-gray-800">{{ $post->user->name }}</p>
                 <p class="text-sm text-gray-500">
-                    Diposting pada {{ $post->created_at->format('j M Y') }} 
-                    ({{ $post->created_at->diffForHumans() }})
+                    {{ $post->created_at->diffForHumans() }}
                 </p>
             </div>
         </div>
@@ -24,13 +23,13 @@
 
         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-5">
             <div class="mb-4 sm:mb-0">
-                <span class="text-sm text-gray-600">Mengundang ke Room:</span>
+                {{-- <span class="text-sm text-gray-600">Mengundang ke Room:</span> --}}
                 <div class="flex items-center mt-1">
                     <span class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium
                                  bg-indigo-100 text-indigo-800 mr-2">
                         {{ $post->room->roomType->name }}
                     </span>
-                    <span class="font-semibold text-gray-800">{{ $post->room->title }}</span>
+                    {{-- <span class="font-semibold text-gray-800">{{ $post->room->title }}</span> --}}
                 </div>
             </div>
 

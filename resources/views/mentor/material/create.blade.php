@@ -112,7 +112,7 @@
                         Batal
                     </a>
                     <button type="submit"
-                        class="px-6 py-2.5 rounded-full text-white font-bold bg-teal-500 shadow-md hover:bg-teal-600 transition duration-200 active:scale-[0.99] transition">
+                        class="px-6 py-2.5 rounded-full text-white font-bold bg-teal-500 shadow-md hover:bg-teal-600 transition duration-200 active:scale-[0.99]">
                         Simpan Materi
                     </button>
                 </div>

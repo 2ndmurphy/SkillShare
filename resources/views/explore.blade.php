@@ -50,12 +50,6 @@
                             Mentor Populer
                         </h3>
                         <ul class="space-y-3">
-                            {{-- <button
-                                class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                <img class="h-9 w-9 rounded-full object-cover"
-                                    src="{{ Auth::user()->profile_photo_url ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}"
-                                    alt="{{ Auth::user()->name }}" />
-                            </button> --}}
                             <li class="flex items-center text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                 <img class="h-10 w-10 rounded-full object-cover mr-3" src="https://placehold.co/60x60" alt="Avatar">
                                 <span class="text-gray-700 font-medium">Mentor A</span>

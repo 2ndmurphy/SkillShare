@@ -5,17 +5,14 @@
     <div class="text-white">
         <p class="text-lg font-medium">Welcome aboard,</p>
         <h1 class="text-3xl md:text-4xl font-bold mt-1">
-            Mentor {{ auth()->user()->name ?? 'Bagol' }}...
+            {{ auth()->user()->name ?? 'Bagol' }}...
         </h1>
     </div>
 
     {{-- GRID ROOM --}}
     <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
         @forelse ($rooms as $room)
-            {{-- wrapper kartu putih seperti di desain --}}
-            <div class="bg-white rounded-3xl shadow-sm p-6 flex flex-col justify-between">
-                @include('partials._room-card', ['room' => $room])
-            </div>
+            @include('partials._room-card', ['room' => $room])
         @empty
             <div class="md:col-span-2 bg-white/95 p-8 rounded-3xl shadow-sm text-center text-gray-600">
                 <p class="text-base font-semibold">Anda belum membuat room.</p>
