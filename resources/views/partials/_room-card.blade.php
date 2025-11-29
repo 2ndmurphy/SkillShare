@@ -9,16 +9,16 @@
         </p>
 
         <div class="mb-4">
-            @if($room->status == 'open')
+            @if($room->status == 'waiting')
                 <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                     Dibuka
                 </span>
-            @elseif($room->status == 'closed')
-                <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                    Ditutup
+            @elseif($room->status == 'started')
+                <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                    Sedang Berlangusng
                 </span>
             @else
-                <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">
+                <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
                     Selesai
                 </span>
             @endif

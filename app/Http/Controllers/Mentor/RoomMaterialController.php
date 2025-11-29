@@ -90,7 +90,7 @@ class RoomMaterialController extends Controller
 
         $roomMaterial->delete();
 
-        return redirect()->route('mentor.rooms.materials.create', $room)
+        return redirect()->route('mentor.rooms.show', $room)
                          ->with('status', 'Materi berhasil dihapus.');
     }
 }

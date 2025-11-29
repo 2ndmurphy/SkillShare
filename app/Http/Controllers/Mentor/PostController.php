@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Mentor;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Mentor\StorePostRequest;
-use App\Models\Room;
 use App\Models\Post;
+use App\Models\Room;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 class PostController extends Controller
 {
@@ -50,23 +48,43 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(Post $post) {}
+
+    public function edit(Post $post)
     {
-        
+        if ($post->user_id !== auth()->user()->id) {
+            abort(403);
+        }
+
+        return view('mentor.post.edit', [
+            'post' => $post,
+            'room' => $post->room,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(StorePostRequest $request, Post $post)
     {
-        //
+        if ($post->user_id !== auth()->user()->id) {
+            abort(403);
+        }
+
+        $validated = $request->validated();
+
+        $post->update([
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+        ]);
+
+        return redirect()->route('mentor.rooms.show', $post->room)
+            ->with('status', 'Post undangan berhasil diperbarui!');
     }
 
     /**
      * Hapus (Soft Delete) post undangan dari room.
-     * * @param \App\Models\Room $room
-     * @param \App\Models\Post $post
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Room $room, Post $post)
