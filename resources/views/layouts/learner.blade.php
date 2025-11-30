@@ -52,7 +52,7 @@
         {{-- RIGHT: USER DROPDOWN --}}
         <div class="relative flex items-center space-x-4" x-data="{ open: false }">
             @auth
-                <a href="" class="py-3 px-6 border-2 border-teal-500 rounded-xl text-md font-semibold text-gray-500">Dashboard</a>
+                <a href="{{ route('learner.dashboard.index') }}" class="py-3 px-6 border-2 border-teal-500 rounded-xl text-md font-semibold text-gray-500">Dashboard</a>
             @endauth
           {{-- AVATAR BUTTON --}}
           <button @click="open = !open" class="flex items-center gap-3 rounded-full p-1 transition hover:bg-gray-100">
@@ -109,7 +109,7 @@
       <main class="flex-1 overflow-y-auto overflow-x-hidden bg-teal-400">
         <div class="px- mx-auto max-w-6xl py-6">
 
-          @include('partials._toast-status')
+          @include('layouts.partials._toast-status')
 
           {{-- Wrap khusus halaman dashboard dengan card hijau --}}
           @if (request()->routeIs('mentor.dashboard.index'))

@@ -20,7 +20,7 @@
             @csrf
             @method('PUT')
 
-            @include('partials._form-errors')
+            @include('layouts.partials._form-errors')
 
             {{-- Bio --}}
             <div class="space-y-2">

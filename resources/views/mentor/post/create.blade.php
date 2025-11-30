@@ -20,7 +20,7 @@
                 </header>
 
                 @csrf
-                @include('partials._form-errors')
+                @include('layouts.partials._form-errors')
 
                 {{-- Judul --}}
                 <div class="space-y-2">

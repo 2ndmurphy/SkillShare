@@ -2,11 +2,15 @@
 
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\Mentor\{
-    DashboardController,
-    RoomController,
+    DashboardController as MentorDashboard,
+    RoomController as MentorRoom,
     RoomMaterialController,
     PostController,
     MentorProfileController,
+};
+use App\Http\Controllers\Learner\{
+    DashboardController as LearnDashboard,
+    RoomController as LearnRoom,
 };
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -32,16 +36,17 @@ Route::middleware('auth')->group(function () {
 
     // Mentor Verified Only Page Here
     Route::middleware(['role:mentor', 'verified'])->prefix('m')->name('mentor.')->group(fn () => [
-        Route::resource('dashboard', DashboardController::class),
+        Route::resource('dashboard', MentorDashboard::class),
         Route::resource('profile', MentorProfileController::class),
-        Route::resource('rooms', RoomController::class),
+        Route::resource('rooms', MentorRoom::class),
         Route::resource('rooms.materials', RoomMaterialController::class),
         Route::resource('rooms.posts', PostController::class),
     ]);
 
     // Learner Only Page Here
-    Route::middleware('role:learner')->group(fn () => [
-
+    Route::middleware('role:learner')->prefix('s')->name('learner.')->group(fn () => [
+        Route::resource('dashboard', LearnDashboard::class)->only(['index']),
+        Route::resource('rooms', LearnRoom::class)->only(['show']),
     ]);
 });
 

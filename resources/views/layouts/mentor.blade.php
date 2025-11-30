@@ -63,7 +63,7 @@
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-teal-400">
                 <div class="px-8 py-8 max-w-6xl mx-auto">
 
-                    @include('partials._toast-status')
+                    @include('layouts.partials._toast-status')
 
                     {{-- Wrap khusus halaman dashboard dengan card hijau --}}
                     @if (request()->routeIs('mentor.dashboard.index'))

@@ -34,7 +34,7 @@
       {{-- Daftar Post --}}
       <div class="space-y-5">
         @forelse ($posts as $post)
-          @include('partials._post-card', ['post' => $post])
+          @include('layouts.partials._post-card', ['post' => $post])
         @empty
           <div class="rounded-3xl border border-dashed border-slate-200 bg-white shadow-sm">
             <div class="p-8 text-center">

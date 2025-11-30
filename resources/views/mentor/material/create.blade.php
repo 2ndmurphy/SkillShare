@@ -17,7 +17,7 @@
                 x-data="{ type: '{{ old('type', 'file') }}' }" class="space-y-6">
                 @csrf
 
-                @include('partials._form-errors')
+                @include('layouts.partials._form-errors')
 
                 {{-- Judul Materi --}}
                 <div class="space-y-2">

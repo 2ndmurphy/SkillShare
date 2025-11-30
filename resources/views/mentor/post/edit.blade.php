@@ -30,7 +30,7 @@
             @method('PUT')
 
             {{-- ERROR ALERT --}}
-            @include('partials._form-errors')
+            @include('layouts.partials._form-errors')
 
             {{-- JUDUL POST --}}
             <div class="mb-5">

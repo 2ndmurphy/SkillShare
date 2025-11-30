@@ -28,7 +28,7 @@
       @csrf
       @method('PUT')
 
-      @include('partials._form-errors')
+      @include('layouts.partials._form-errors')
 
       {{-- JUDUL MATERI --}}
       <div class="mb-5">
