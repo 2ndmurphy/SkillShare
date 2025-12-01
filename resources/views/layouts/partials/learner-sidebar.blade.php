@@ -16,11 +16,11 @@
         @auth
         <a href="{{ route('learner.dashboard.index') }}"
            class="group flex items-center gap-3 px-6 py-3 text-sm font-medium
-                  {{ request()->routeIs('mentor.dashboard.index') 
+                  {{ request()->routeIs('learner.dashboard.index') 
                         ? 'text-teal-600' 
                         : 'text-gray-500 hover:text-gray-900' }}">
             <div class="h-11 w-11 flex items-center justify-center rounded-2xl
-                        {{ request()->routeIs('mentor.dashboard.index') 
+                        {{ request()->routeIs('learner.dashboard.index') 
                             ? 'bg-teal-50 text-teal-600' 
                             : 'bg-gray-50 group-hover:bg-gray-100 text-gray-500 group-hover:text-gray-900' }}">
                 {{-- icon home --}}
@@ -36,13 +36,13 @@
 
         {{-- Profil Mentor --}}
         @auth
-        <a href="{{ route('explore.index', auth()->user()) }}"
+        <a href="{{ route('explore.index') }}"
            class="group flex items-center gap-3 px-6 py-3 text-sm font-medium
-                  {{ request()->routeIs('mentor.profile.edit') 
+                  {{ request()->routeIs('explore.index') 
                         ? 'text-teal-600' 
                         : 'text-gray-500 hover:text-gray-900' }}">
             <div class="h-11 w-11 flex items-center justify-center rounded-2xl
-                        {{ request()->routeIs('mentor.profile.edit') 
+                        {{ request()->routeIs('explore.index') 
                             ? 'bg-teal-50 text-teal-600' 
                             : 'bg-gray-50 group-hover:bg-gray-100 text-gray-500 group-hover:text-gray-900' }}">
                 {{-- icon user --}}
